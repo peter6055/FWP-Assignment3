@@ -1,4 +1,4 @@
-# ACKNOWLEDGE
+# Acknowledge
 
 ### Navbar
 
@@ -11,6 +11,15 @@
 ### Email regex
 
 [https://regex101.com/r/pO0jF8/1](https://regex101.com/r/pO0jF8/1)
+
+# Assumption
+
+### Space is a Character
+
+According to the course material of "Central Connecticut State University"\
+space conduct as character. Therefore, the spec of this assessment mentioned \
+max 60 characters on fullname and 20 characters on skill name word count includes\
+characters.[https://chortle.ccsu.edu/qbasic/chapter13/bc13_6.html](https://chortle.ccsu.edu/qbasic/chapter13/bc13_6.html)
 
 # Getting Started
 

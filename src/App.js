@@ -152,9 +152,9 @@ function App() {
 
         // start validation
         // ------- name regex check (format and not empty) -------
-        const fullnameRegex = new RegExp("^[a-zA-Z]{2,50}\\s[a-zA-Z]{2,50}(-[a-zA-Z]{2,50})?$");
+        const fullnameRegex = new RegExp("^[A-Z]{1}[a-zA-Z]{1,50}\\s[A-Z]{1}[a-zA-Z]{1,50}(-[a-zA-Z]{1,50})?$");
         if (!fullnameRegex.test(fullname)) {
-            setNameStatus("Please fill in your full name with the format (Firstname Lastname)");
+            setNameStatus("Please fill in your full name with the format (Firstname Lastname) case sensitive");
             hasError = true;
 
         } else if (fullname.length > 60) {
@@ -345,7 +345,7 @@ function App() {
                                     onClick={handleAddSkill}
                                     disabled={addBtnStatus}
                                 >
-                                    Add skill
+                                    Add a new skill
                                 </Button>
                                 <br/><br/>
                                 <Table columns={columns} dataSource={state.skillList}
