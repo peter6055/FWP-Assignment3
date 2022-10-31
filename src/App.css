@@ -1,0 +1,33 @@
+/* Global layout*/
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.ant-layout-content {
+    height: calc(100vh - 168px);
+}
+
+.ant-card-small > .ant-card-body {
+    padding: 0px !important;
+}
+
+.ant-card-small > .ant-card-body > .ant-card-body-inner {
+    padding: 40px 40px 0px 40px !important;
+}
+
+.ant-card-small > .ant-card-body > .ant-card-footer-inner {
+    padding: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Form */
+.skill-collection {
+    display: flex;
+}
+
+label {
+    margin-bottom: 20px;
+}
