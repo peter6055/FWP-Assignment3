@@ -28,6 +28,28 @@
     display: flex;
 }
 
+.skill-collection > div {
+    margin-right: 20px;
+    width: 50%;
+}
+
 label {
     margin-bottom: 20px;
+}
+
+.has-error > label {
+    color: red;
+}
+
+.has-error > span {
+    border-color: #ff4d4f;
+    color: red;
+}
+
+.has-error > label > span > .ant-radio-inner {
+    border-color: red;
+}
+
+.ant-alert {
+    margin-top: 10px !important;
 }
