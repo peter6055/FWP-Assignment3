@@ -4,7 +4,6 @@ export const initialState = {
 };
 
 export const reducer = (state, action) => {
-    console.log()
     switch (action.type) {
         case "add": {
             const newSkill = {

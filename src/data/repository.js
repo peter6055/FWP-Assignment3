@@ -41,7 +41,7 @@ function createEmployee(fullname, email, skillList, proficiency) {
     // get exist employees
     const existEmployee = getEmployee();
 
-    // push the newly added employee to to exist employees data set
+    // push the newly added employee to exist employees data set
     existEmployee.push(employee);
 
     // upload to localstorage
@@ -58,5 +58,6 @@ function generateId() {
 
 export {
     initStorage,
-    createEmployee
+    createEmployee,
+    getEmployee
 }
