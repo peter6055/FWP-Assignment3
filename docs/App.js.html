@@ -1,5 +1,33 @@
-/**
- * @author Shih-ming Liu <s3789585@student.rmit.edu.au>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Shih-ming Liu &lt;s3789585@student.rmit.edu.au>
  */
 
 import './App.css';
@@ -42,6 +70,9 @@ function App() {
 
     // ------------------------------------------------------------------- Form input tracking ------------------------
     // fullName field tracking
+    /**
+     * @constant
+     */
     const [fullname, setFullname] = useState("");
     const fullnameOnChange = (e) => {
         setFullname(e.target.value);
@@ -111,14 +142,14 @@ function App() {
                 hasError = true;
             }
 
-            if (year === null || year > 20 || year < 1 || year % 1 !== 0) {
+            if (year === null || year > 20 || year &lt; 1 || year % 1 !== 0) {
                 setSkillYearStatus("Year of experience field should be 1-20 (whole number)");
                 setSkillStatus("error");
                 hasError = true;
             }
 
             // there are value inside input and with no error
-            if (skill != "" && year != "" && hasError === false) {
+            if (skill != "" &amp;&amp; year != "" &amp;&amp; hasError === false) {
                 setAddBtnStatus(false);
             } else {
                 setAddBtnStatus(true);
@@ -174,7 +205,7 @@ function App() {
         const splitName = fullname.toLowerCase().split(" "); // fullname: cut it to firstname, lastname
         const splitEmail = email.toLowerCase().split("@"); // email: cut it to firstname.lastname, gmail.com
         const splitEmailToName = splitEmail[0].split(".") // email: then cut it to firstname, lastname
-        if (!(splitName[0] === splitEmailToName[0] && splitName[1] === splitEmailToName[1])) {
+        if (!(splitName[0] === splitEmailToName[0] &amp;&amp; splitName[1] === splitEmailToName[1])) {
             setEmailStatus("Please fill in your email with format (firstname.lastname@gmail.com)");
             hasError = true;
         }
@@ -258,31 +289,31 @@ function App() {
             title: 'Year of Experience',
             dataIndex: 'year',
             key: 'year',
-            render: (text) => <span>{text} year(s)</span>,
+            render: (text) => &lt;span>{text} year(s)&lt;/span>,
         },
         {
             title: 'Action',
             dataIndex: 'id',
             key: 'id',
-            render: (text) => <Button danger value={text} onClick={handleRemoveSkill}>Remove</Button>,
+            render: (text) => &lt;Button danger value={text} onClick={handleRemoveSkill}>Remove&lt;/Button>,
         }
     ];
 
 
     return (
-        <Layout className="layout">
-            <Header>
-                <h1 style={{color: "rgb(255 255 255 / 85%)"}}>Employee System</h1>
-            </Header>
-            <Content
+        &lt;Layout className="layout">
+            &lt;Header>
+                &lt;h1 style={{color: "rgb(255 255 255 / 85%)"}}>Employee System&lt;/h1>
+            &lt;/Header>
+            &lt;Content
                 style={{
                     padding: '0 50px',
                     margin: '16px 0'
                 }}
             >
-                <div className="site-layout-content">Employee Management</div>
-                <div className={"content"}>
-                    <Card
+                &lt;div className="site-layout-content">Employee Management&lt;/div>
+                &lt;div className={"content"}>
+                    &lt;Card
                         title="Create Employee"
                         bordered={false}
                         style={{
@@ -290,105 +321,128 @@ function App() {
                         }}
                         size="small"
                     >
-                        <div className={"ant-card-body-inner"}>
-                            <div className={nameStatusToClass}>
-                                <label>Full Name</label>
-                                <Input placeholder="Full Name (Firstname Lastname)"
+                        &lt;div className={"ant-card-body-inner"}>
+                            &lt;div className={nameStatusToClass}>
+                                &lt;label>Full Name&lt;/label>
+                                &lt;Input placeholder="Full Name (Firstname Lastname)"
                                        style={{"marginTop": "10px"}}
-                                       prefix={<UserOutlined/>}
+                                       prefix={&lt;UserOutlined/>}
                                        onChange={fullnameOnChange}
                                        value={fullname}/>
-                                <br/>
-                                {nameStatus !== "" && <Alert message={nameStatus} type="error" showIcon/>}
-                                <br/><br/>
-                            </div>
+                                &lt;br/>
+                                {nameStatus !== "" &amp;&amp; &lt;Alert message={nameStatus} type="error" showIcon/>}
+                                &lt;br/>&lt;br/>
+                            &lt;/div>
 
-                            <div className={emailStatusToClass}>
-                                <label>Email</label>
-                                <Input placeholder="Email" style={{"marginTop": "10px"}}
-                                       prefix={<MailOutlined/>}
+                            &lt;div className={emailStatusToClass}>
+                                &lt;label>Email&lt;/label>
+                                &lt;Input placeholder="Email" style={{"marginTop": "10px"}}
+                                       prefix={&lt;MailOutlined/>}
                                        onChange={emailOnChange}
                                        value={email}/>
-                                <br/>
-                                {emailStatus !== "" && <Alert message={emailStatus} type="error" showIcon/>}
-                                <br/><br/>
-                            </div>
+                                &lt;br/>
+                                {emailStatus !== "" &amp;&amp; &lt;Alert message={emailStatus} type="error" showIcon/>}
+                                &lt;br/>&lt;br/>
+                            &lt;/div>
 
 
-                            <div className={skillStatusToClass}>
-                                <label>Skill</label><br/>
-                                <div className={"skill-collection"} style={{"marginTop": "10px"}}>
-                                    <div className={skillNameStatusToClass}>
-                                        <Input placeholder="Name"
-                                               prefix={<EditOutlined/>} value={skill}
+                            &lt;div className={skillStatusToClass}>
+                                &lt;label>Skill&lt;/label>&lt;br/>
+                                &lt;div className={"skill-collection"} style={{"marginTop": "10px"}}>
+                                    &lt;div className={skillNameStatusToClass}>
+                                        &lt;Input placeholder="Name"
+                                               prefix={&lt;EditOutlined/>} value={skill}
                                                onChange={skillOnChange}/>
-                                        {skillNameStatus !== "" &&
-                                            <span>{skillNameStatus}</span>}
+                                        {skillNameStatus !== "" &amp;&amp;
+                                            &lt;span>{skillNameStatus}&lt;/span>}
 
-                                    </div>
-                                    <div className={skillYearStatusToClass}>
-                                        <Input placeholder="Experience in Years"
-                                               prefix={<EditOutlined/>} value={year}
+                                    &lt;/div>
+                                    &lt;div className={skillYearStatusToClass}>
+                                        &lt;Input placeholder="Experience in Years"
+                                               prefix={&lt;EditOutlined/>} value={year}
                                                onChange={yearOnChange}/>
-                                        {skillYearStatus !== "" &&
-                                            <span>{skillYearStatus}</span>}
+                                        {skillYearStatus !== "" &amp;&amp;
+                                            &lt;span>{skillYearStatus}&lt;/span>}
 
-                                    </div>
+                                    &lt;/div>
 
 
-                                </div>
-                                {skillStatus === "Please fill in at least one skill" &&
-                                    <Alert message={skillStatus} type="error" showIcon/>}
-                                <Button
+                                &lt;/div>
+                                {skillStatus === "Please fill in at least one skill" &amp;&amp;
+                                    &lt;Alert message={skillStatus} type="error" showIcon/>}
+                                &lt;Button
                                     type="dashed"
                                     style={{"marginTop": "10px"}}
                                     onClick={handleAddSkill}
                                     disabled={addBtnStatus}
                                 >
                                     Add skill
-                                </Button>
-                                <br/><br/>
-                                <Table columns={columns} dataSource={state.skillList}
+                                &lt;/Button>
+                                &lt;br/>&lt;br/>
+                                &lt;Table columns={columns} dataSource={state.skillList}
                                        locale={{emptyText: 'Please add your skill using the above inputs field and button'}}/>
 
-                                <br/><br/>
-                            </div>
+                                &lt;br/>&lt;br/>
+                            &lt;/div>
 
-                            <div className={proficiencyStatusToClass}>
-                                <label>Proficiency</label><br/>
-                                <Radio.Group onChange={proficiencyOnChange} value={proficiency}
+                            &lt;div className={proficiencyStatusToClass}>
+                                &lt;label>Proficiency&lt;/label>&lt;br/>
+                                &lt;Radio.Group onChange={proficiencyOnChange} value={proficiency}
                                              className={"proficiency-collection " + proficiencyStatusToClass}
                                              style={{"marginTop": "10px"}}>
-                                    <Radio value={"beginner"}>Beginner</Radio>
-                                    <Radio value={"intermediate"}>Intermediate</Radio>
-                                    <Radio value={"advanced"}>Advanced</Radio>
-                                </Radio.Group>
-                                <br/>
-                                {proficiencyStatus !== "" && <Alert message={proficiencyStatus} type="error" showIcon/>}
-                                <br/><br/>
-                            </div>
+                                    &lt;Radio value={"beginner"}>Beginner&lt;/Radio>
+                                    &lt;Radio value={"intermediate"}>Intermediate&lt;/Radio>
+                                    &lt;Radio value={"advanced"}>Advanced&lt;/Radio>
+                                &lt;/Radio.Group>
+                                &lt;br/>
+                                {proficiencyStatus !== "" &amp;&amp; &lt;Alert message={proficiencyStatus} type="error" showIcon/>}
+                                &lt;br/>&lt;br/>
+                            &lt;/div>
 
-                        </div>
-
-
-                        <div className={"ant-card-footer-inner"}>
-                            <Button type="primary" htmlType="submit" onClick={handleSubmit}>Submit</Button>
-                        </div>
-
-                    </Card>
-                </div>
+                        &lt;/div>
 
 
-            </Content>
-            <Footer
+                        &lt;div className={"ant-card-footer-inner"}>
+                            &lt;Button type="primary" htmlType="submit" onClick={handleSubmit}>Submit&lt;/Button>
+                        &lt;/div>
+
+                    &lt;/Card>
+                &lt;/div>
+
+
+            &lt;/Content>
+            &lt;Footer
                 style={{
                     textAlign: 'center',
                 }}
             >
                 FWP A3 ©2022 Created by Shih-ming Liu
-            </Footer>
-        </Layout>
+            &lt;/Footer>
+        &lt;/Layout>
     );
 }
 
 export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createEmployee">createEmployee</a></li><li><a href="global.html#EMPLOYEE_KEY">EMPLOYEE_KEY</a></li><li><a href="global.html#generateId">generateId</a></li><li><a href="global.html#getEmployee">getEmployee</a></li><li><a href="global.html#initStorage">initStorage</a></li><li><a href="global.html#popMessage">popMessage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Oct 31 2022 20:11:14 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
