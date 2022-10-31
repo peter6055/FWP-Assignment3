@@ -1,14 +1,34 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import {Alert, Button, Card, Input, Layout, Radio, Table} from "antd";
+import {Alert, Button, Card, Input, Layout, Radio, Table, message} from "antd";
 import {UserOutlined, MailOutlined, EditOutlined} from '@ant-design/icons';
 import React, {useEffect, useReducer, useState} from 'react';
 import {initialState, reducer} from "./data/skill.reducer.js";
+import {createEmployee, initStorage} from "./data/repository";
 
 const {Header, Content, Footer} = Layout;
 
+const popMessage = (result, msg) => {
+    // eslint-disable-next-line default-case
+    switch (result) {
+        case "success":
+            message.success(msg);
+            break;
+
+        case "error":
+            message.error(msg);
+            break;
+
+        case "warning":
+            message.warning(msg);
+            break;
+    }
+};
 
 function App() {
+    // init the storage in the first place
+    initStorage()
+
     // ------------------------------------------------------------------- Form input tracking ------------------------
     // fullName field tracking
     const [fullname, setFullname] = useState("");
@@ -110,7 +130,8 @@ function App() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(state);
+        // track is there any error
+        let hasError = false;
 
         // clear error check and error message first
         setNameStatus("");
@@ -123,10 +144,11 @@ function App() {
         const fullnameRegex = new RegExp("^[a-zA-Z]{2,50}\\s[a-zA-Z]{2,50}(-[a-zA-Z]{2,50})?$");
         if (!fullnameRegex.test(fullname)) {
             setNameStatus("Please fill in your full name with the format (Firstname Lastname)");
+            hasError = true;
 
         } else if (fullname.length > 60) {
             setNameStatus("Name shouldn't have more than 60 characters");
-
+            hasError = true;
         }
 
         // ------- email -------
@@ -134,6 +156,7 @@ function App() {
         const emailRegex = new RegExp("^[a-z0-9]+(?!.*(?:\\+{2,}|\\-{2,}|\\.{2,}))(?:[\\.+\\-]{0,1}[a-z0-9])*@gmail\\.com$");
         if (!emailRegex.test(email)) {
             setEmailStatus("Please fill in your email with format (firstname.lastname@gmail.com)");
+            hasError = true;
         }
 
         // check email fit firstname.lastname (toLowerCase ensure case won't impact the result)
@@ -142,20 +165,48 @@ function App() {
         const splitEmailToName = splitEmail[0].split(".") // email: then cut it to firstname, lastname
         if (!(splitName[0] === splitEmailToName[0] && splitName[1] === splitEmailToName[1])) {
             setEmailStatus("Please fill in your email with format (firstname.lastname@gmail.com)");
+            hasError = true;
         }
 
 
         // ------- proficiency should be one of the option -------
         if (!(proficiency === "beginner" || proficiency === "intermediate" || proficiency === "advanced")) {
             setProficiencyStatus("Please select proficiency");
+            hasError = true;
         }
 
 
         // ------- at least one skill -------
         if (state.skillList.length === 0) {
             setSkillStatus("Please fill in at least one skill");
+            hasError = true;
         }
 
+        // store to database when there are no error
+        if (hasError === false) {
+            createEmployee(fullname, email, state.skillList, proficiency);
+            popMessage("success", "Employee added successfully!")
+
+            // --- cleanup ---
+            // status
+            setNameStatus("");
+            setEmailStatus("");
+            setProficiencyStatus("");
+            setSkillNameStatus("");
+            setSkillYearStatus("");
+            setSkillStatus("");
+
+            // input
+            setFullname("");
+            setEmail("");
+            setSkill("");
+            setYear("");
+            setProficiency("");
+
+            // release btn count
+            setReleaseBtnUseEffectCount(0);
+            dispatch({type: 'clearall'})
+        }
     }
 
 
@@ -234,7 +285,8 @@ function App() {
                                 <Input placeholder="Full Name (Firstname Lastname)"
                                        style={{"marginTop": "10px"}}
                                        prefix={<UserOutlined/>}
-                                       onChange={fullnameOnChange}/>
+                                       onChange={fullnameOnChange}
+                                       value={fullname}/>
                                 <br/>
                                 {nameStatus !== "" && <Alert message={nameStatus} type="error" showIcon/>}
                                 <br/><br/>
@@ -244,7 +296,8 @@ function App() {
                                 <label>Email</label>
                                 <Input placeholder="Email" style={{"marginTop": "10px"}}
                                        prefix={<MailOutlined/>}
-                                       onChange={emailOnChange}/>
+                                       onChange={emailOnChange}
+                                       value={email}/>
                                 <br/>
                                 {emailStatus !== "" && <Alert message={emailStatus} type="error" showIcon/>}
                                 <br/><br/>

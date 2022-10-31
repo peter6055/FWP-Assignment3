@@ -31,6 +31,10 @@ export const reducer = (state, action) => {
                 skillList: skillLists
             };
         }
+        case "clearall": {
+            return initialState;
+        }
+
         default:
             return state;
     }
