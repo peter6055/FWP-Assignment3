@@ -1,4 +1,4 @@
-***Please notes: All the crediential or password are either expired or remove from service provider.***
+***Please notes: All the credential or password are either expired or remove from service provider.***
 
 
 # Acknowledge
